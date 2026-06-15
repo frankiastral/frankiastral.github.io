@@ -22,7 +22,7 @@ function App() {
             download="Franki Astral - Nido de ratas v1.mp3"
             className="download-btn"
           >
-            [ EXTRACCION DE DATOS ]
+            [ Descargar Virus ]
           </a>
         </div>
       </section>
