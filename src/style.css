@@ -43,10 +43,17 @@ body::before {
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 0.8rem; /* Padding lateral mínimo para móvil */
   position: relative;
   z-index: 5;
-  gap: 3rem;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+    gap: 3rem;
+  }
 }
 
 header {
@@ -54,16 +61,15 @@ header {
   width: 100%;
 }
 
-/* Glitch Dual: Inteligente para PC y Móvil */
 .mystery-glitch {
-  font-size: clamp(2.5rem, 12vw, 6rem); /* Más grande en PC */
+  font-size: clamp(3rem, 15vw, 6rem); /* Aumentado tamaño mínimo para móvil */
   font-weight: 700;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
   color: var(--text-color);
-  letter-spacing: clamp(3px, 1.5vw, 10px);
-  line-height: 1.1;
+  letter-spacing: clamp(2px, 2vw, 10px);
+  line-height: 1;
   text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75),
               -0.05em -0.025em 0 rgba(0, 255, 242, 0.75);
 }
@@ -81,7 +87,6 @@ header {
   opacity: 0.8;
 }
 
-/* Capas de glitch optimizadas */
 .mystery-glitch::before {
   left: 3px;
   text-shadow: -2px 0 #ff003c;
@@ -103,54 +108,47 @@ header {
   100% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
 }
 
-/* Suavizado específico para móviles */
 @media (max-width: 768px) {
   .mystery-glitch {
     text-shadow: 1px 0 0 rgba(255, 0, 60, 0.5),
                 -1px 0 0 rgba(0, 255, 242, 0.5);
   }
   .mystery-glitch::before, .mystery-glitch::after {
-    animation-duration: 5s; /* Glitch más lento y menos "nervioso" en móvil */
+    animation-duration: 5s;
   }
 }
 
 .motto {
   color: var(--accent-color);
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
   opacity: 0.8;
-  margin-top: 1.5rem;
-  letter-spacing: 4px;
+  margin-top: 1rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 0 0 8px var(--accent-color);
 }
 
+/* Tarjeta Optimizada para Móvil */
 .card {
   border: 1px solid var(--border-color);
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1rem; /* Padding lateral mínimo en móvil */
   background: rgba(0, 59, 0, 0.03);
-  width: 100%;
-  max-width: 500px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 550px;
   position: relative;
   text-align: center;
   box-shadow: 0 0 30px rgba(0, 255, 65, 0.03);
   border-radius: 2px;
 }
 
-.card::before {
-  content: "SECURE_NODE_01 // ASTRAL_SYNC";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-color);
-  padding: 0 12px;
-  font-size: 0.6rem;
-  color: var(--accent-color);
-  letter-spacing: 1px;
+@media (min-width: 768px) {
+  .card {
+    padding: 2.5rem 2rem;
+  }
 }
 
 h3 {
-  font-size: clamp(1rem, 3vw, 1.3rem);
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
   margin-bottom: 2rem;
   color: #fff;
   letter-spacing: 2px;
@@ -159,8 +157,8 @@ h3 {
 .audio-player audio {
   width: 100%;
   filter: invert(1) hue-rotate(90deg) brightness(1.2);
-  opacity: 0.85;
-  height: 40px;
+  opacity: 0.9;
+  height: 45px; /* Más grande en móvil */
 }
 
 .download-btn {
@@ -168,8 +166,8 @@ h3 {
   margin-top: 2.5rem;
   color: var(--text-color);
   text-decoration: none;
-  font-size: 0.8rem;
-  padding: 1rem;
+  font-size: 0.9rem; /* Fuente más grande para legibilidad */
+  padding: 1.2rem; /* Más área de click */
   border: 1px solid var(--text-color);
   background: transparent;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -197,6 +195,6 @@ footer {
 @media (max-height: 700px) {
   .container {
     justify-content: flex-start;
-    padding-top: 4rem;
+    padding-top: 2rem;
   }
 }
