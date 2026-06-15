@@ -1,0 +1,122 @@
+:root {
+  --bg-color: #050505;
+  --text-color: #e0e0e0;
+  --accent-color: #00ffaa; /* Un verde neón sutil para el tinte cyberpunk */
+  --dim-color: #555;
+  --border-color: #1a1a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+header {
+  margin-bottom: 6rem;
+  border-left: 2px solid var(--accent-color);
+  padding-left: 1.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.motto {
+  color: var(--dim-color);
+  font-size: 0.9rem;
+}
+
+section {
+  margin-bottom: 5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #0a0a0a, #050505);
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 170, 0.05);
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 0.85rem;
+  color: var(--dim-color);
+}
+
+.audio-player {
+  background: #0a0a0a;
+  padding: 1rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+audio {
+  width: 100%;
+  filter: invert(100%) hue-rotate(180deg) brightness(1.5);
+  height: 30px;
+}
+
+.mystery-glitch {
+  animation: glitch 5s infinite;
+}
+
+@keyframes glitch {
+  0% { opacity: 1; }
+  95% { opacity: 1; transform: skew(0); }
+  96% { opacity: 0.8; transform: skew(5deg); }
+  97% { opacity: 1; transform: skew(-5deg); }
+  100% { opacity: 1; }
+}
+
+footer {
+  margin-top: 10rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--dim-color);
+}
