@@ -4,14 +4,14 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1 className="mystery-glitch">Franki Astral</h1>
+        <h1 className="mystery-glitch" data-text="Franki Astral">Franki Astral</h1>
         <p className="motto">Inspirado en hechos imposibles</p>
       </header>
 
-      <section id="audio-release">
+      <section id="audio-release" style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
         <div className="card">
           <h3>Nido de ratas V1</h3>
-          <p style={{marginBottom: '1rem', opacity: 0.4, fontSize: '0.7rem'}}>ENCRYPTED_SIGNAL_STREAM</p>
+          <p style={{marginBottom: '1rem', opacity: 0.4, fontSize: '0.6rem'}}>STREAMING_LOCAL_NODE</p>
           <div className="audio-player" style={{marginBottom: '1rem'}}>
             <audio controls>
               <source src="/nido_ratas_alter.mp3" type="audio/mpeg" />

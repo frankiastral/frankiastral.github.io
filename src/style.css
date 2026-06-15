@@ -14,70 +14,63 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Fira Code', monospace;
-  line-height: 1.2;
   overflow-x: hidden;
-  min-height: 100vh;
 }
 
-/* CRT Effect */
+/* CRT Effect - Sutil y fijo */
 body::before {
   content: " ";
   display: block;
   position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
   z-index: 100;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
+  opacity: 0.5;
 }
 
+/* Contenedor Flex para ocupar toda la pantalla */
 .container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+  align-items: center;
   max-width: 900px;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: 2rem 1.5rem;
   position: relative;
   z-index: 5;
+  gap: 2rem;
 }
 
 header {
-  margin-bottom: 3rem;
   text-align: center;
+  width: 100%;
 }
 
-/* Glitch Corregido para Móvil */
+/* Glitch Equilibrado */
 .mystery-glitch {
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 10vw, 4.5rem); /* Tamaño dinámico según pantalla */
   font-weight: 700;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
   color: var(--text-color);
-  letter-spacing: 2px;
-  animation: main-glitch 3s infinite;
-  /* Asegura que el contenedor respete el tamaño del texto */
-  white-space: normal;
+  letter-spacing: clamp(2px, 2vw, 5px);
+  line-height: 1;
 }
 
-@media (min-width: 768px) {
-  .mystery-glitch {
-    font-size: 5rem;
-    letter-spacing: 5px;
-    white-space: nowrap;
-  }
-  .container {
-    padding: 10rem 2rem;
-  }
-}
-
-/* Capas de Glitch con Herencia de Tamaño */
 .mystery-glitch::before,
 .mystery-glitch::after {
-  content: attr(data-text); /* Usa el atributo data-text para el contenido */
+  content: attr(data-text);
   position: absolute;
   top: 0;
   left: 0;
@@ -87,96 +80,108 @@ header {
   pointer-events: none;
 }
 
+/* Animación de Glitch más limpia y menos invasiva en móvil */
 .mystery-glitch::before {
   left: 2px;
-  text-shadow: -2px 0 #ff003c;
-  animation: glitch-anim 5s infinite linear alternate-reverse;
+  text-shadow: -1px 0 #ff003c;
+  animation: glitch-v2 4s infinite linear alternate-reverse;
 }
 
 .mystery-glitch::after {
   left: -2px;
-  text-shadow: -2px 0 #00fff2;
-  animation: glitch-anim2 1s infinite linear alternate-reverse;
+  text-shadow: 1px 0 #00fff2;
+  animation: glitch-v2 2s infinite linear alternate-reverse;
 }
 
-@keyframes glitch-anim {
-  0% { clip-path: inset(40% 0 61% 0); }
-  20% { clip-path: inset(92% 0 1% 0); }
-  40% { clip-path: inset(43% 0 1% 0); }
-  60% { clip-path: inset(25% 0 58% 0); }
-  80% { clip-path: inset(54% 0 7% 0); }
-  100% { clip-path: inset(58% 0 43% 0); }
-}
-
-@keyframes glitch-anim2 {
-  0% { clip-path: inset(24% 0 29% 0); }
-  20% { clip-path: inset(54% 0 21% 0); }
-  40% { clip-path: inset(11% 0 31% 0); }
-  60% { clip-path: inset(34% 0 14% 0); }
-  80% { clip-path: inset(14% 0 61% 0); }
-  100% { clip-path: inset(61% 0 14% 0); }
+@keyframes glitch-v2 {
+  0% { clip-path: inset(80% 0 1% 0); }
+  20% { clip-path: inset(20% 0 70% 0); }
+  40% { clip-path: inset(50% 0 40% 0); }
+  60% { clip-path: inset(10% 0 85% 0); }
+  80% { clip-path: inset(40% 0 50% 0); }
+  100% { clip-path: inset(1% 0 80% 0); }
 }
 
 .motto {
   color: var(--accent-color);
-  font-size: 0.7rem;
-  opacity: 0.7;
+  font-size: 0.75rem;
+  opacity: 0.8;
   margin-top: 1rem;
-  letter-spacing: 1px;
-  text-shadow: 0 0 5px var(--accent-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
+/* Tarjeta Homogénea */
 .card {
   border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  margin-top: 3rem;
-  background: rgba(0, 59, 0, 0.05);
+  padding: 2rem 1.5rem;
+  background: rgba(0, 59, 0, 0.03);
+  width: 100%;
+  max-width: 450px;
   position: relative;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.02);
 }
 
 .card::before {
-  content: "> INITIALIZING SECURE CONNECTION...";
+  content: "SECURE_NODE_01";
   position: absolute;
-  top: -15px;
-  left: 10px;
-  font-size: 0.5rem;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-color);
+  padding: 0 10px;
+  font-size: 0.6rem;
   color: var(--accent-color);
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
+  color: #fff;
+  letter-spacing: 1px;
 }
 
 .audio-player audio {
   width: 100%;
-  filter: invert(1) hue-rotate(90deg) brightness(1.2);
-  opacity: 0.9;
+  filter: invert(1) hue-rotate(90deg) brightness(1.1);
+  opacity: 0.8;
+  height: 35px;
 }
 
 .download-btn {
   display: block;
-  text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   color: var(--text-color);
   text-decoration: none;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   padding: 0.8rem;
   border: 1px solid var(--text-color);
-  transition: all 0.2s;
+  background: transparent;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-@media (min-width: 768px) {
-  .download-btn {
-    display: inline-block;
-  }
+.download-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 20px var(--text-color);
 }
 
 footer {
-  padding: 4rem 0 2rem;
+  width: 100%;
   text-align: center;
-  font-size: 0.5rem;
+  font-size: 0.55rem;
   color: var(--dim-color);
+  margin-top: auto; /* Empuja el footer al final */
+  padding-bottom: 1rem;
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-height: 600px) {
+  .container {
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
 }
