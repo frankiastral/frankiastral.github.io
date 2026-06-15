@@ -1,7 +1,7 @@
 :root {
   --bg-color: #020202;
-  --text-color: #00ff41; /* Verde terminal */
-  --accent-color: #bc13fe; /* Púrpura sutil para detalles */
+  --text-color: #00ff41;
+  --accent-color: #bc13fe;
   --dim-color: #003b00;
   --border-color: #003b00;
 }
@@ -19,18 +19,19 @@ body {
   color: var(--text-color);
   font-family: 'Fira Code', monospace;
   line-height: 1.6;
-  overflow-x: hidden;
-  height: 100vh;
+  overflow-x: hidden; /* Evita scroll horizontal en móviles */
+  min-height: 100vh;
 }
 
-/* CRT Effect */
+/* CRT Effect - Ajustado para no bloquear clicks */
 body::before {
   content: " ";
   display: block;
-  position: absolute;
+  position: fixed; /* Cambiado a fixed para cubrir todo el scroll */
   top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 10;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 100;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
 }
@@ -38,26 +39,38 @@ body::before {
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 10rem 2rem;
+  padding: 4rem 1.5rem; /* Padding reducido para móviles */
   position: relative;
   z-index: 5;
 }
 
 header {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
-/* Glitch Moderado Verde */
+/* Glitch Verde Responsivo */
 .mystery-glitch {
-  font-size: 4rem;
+  font-size: 3rem; /* Tamaño base reducido */
   font-weight: 700;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
   color: var(--text-color);
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   animation: main-glitch 3s infinite;
+  word-wrap: break-word;
+}
+
+/* Media Query para pantallas más grandes */
+@media (min-width: 768px) {
+  .mystery-glitch {
+    font-size: 5rem;
+    letter-spacing: 5px;
+  }
+  .container {
+    padding: 10rem 2rem;
+  }
 }
 
 .mystery-glitch::before,
@@ -104,18 +117,18 @@ header {
 }
 
 .motto {
-  color: var(--accent-color); /* Lema en púrpura */
-  font-size: 0.8rem;
+  color: var(--accent-color);
+  font-size: 0.7rem;
   opacity: 0.7;
   margin-top: 1rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-shadow: 0 0 5px var(--accent-color);
 }
 
 .card {
   border: 1px solid var(--border-color);
-  padding: 2rem;
-  margin-top: 4rem;
+  padding: 1.5rem;
+  margin-top: 3rem;
   background: rgba(0, 59, 0, 0.05);
   position: relative;
 }
@@ -123,14 +136,14 @@ header {
 .card::before {
   content: "> INITIALIZING SECURE CONNECTION...";
   position: absolute;
-  top: -20px;
+  top: -15px;
   left: 10px;
-  font-size: 0.6rem;
-  color: var(--accent-color); /* Pequeñas letras en púrpura */
+  font-size: 0.5rem;
+  color: var(--accent-color);
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
@@ -139,32 +152,33 @@ h3 {
 .audio-player audio {
   width: 100%;
   filter: invert(1) hue-rotate(90deg) brightness(1.2);
-  opacity: 0.7;
+  opacity: 0.9; /* Más visible en móvil */
 }
 
 .download-btn {
-  display: inline-block;
+  display: block; /* Ocupa todo el ancho en móvil */
+  text-align: center;
   margin-top: 1.5rem;
   color: var(--text-color);
   text-decoration: none;
   font-size: 0.7rem;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem;
   border: 1px solid var(--text-color);
   transition: all 0.2s;
 }
 
-.download-btn:hover {
-  background: var(--text-color);
-  color: var(--bg-color);
-  box-shadow: 0 0 15px var(--text-color);
+@media (min-width: 768px) {
+  .download-btn {
+    display: inline-block;
+  }
+  .card {
+    padding: 2rem;
+  }
 }
 
 footer {
-  position: fixed;
-  bottom: 2rem;
-  width: 100%;
+  padding: 2rem 0;
   text-align: center;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: var(--dim-color);
-  left: 0;
 }
