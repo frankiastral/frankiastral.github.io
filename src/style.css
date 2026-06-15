@@ -18,16 +18,16 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Fira Code', monospace;
-  line-height: 1.6;
-  overflow-x: hidden; /* Evita scroll horizontal en móviles */
+  line-height: 1.2;
+  overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* CRT Effect - Ajustado para no bloquear clicks */
+/* CRT Effect */
 body::before {
   content: " ";
   display: block;
-  position: fixed; /* Cambiado a fixed para cubrir todo el scroll */
+  position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
               linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
@@ -39,7 +39,7 @@ body::before {
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 4rem 1.5rem; /* Padding reducido para móviles */
+  padding: 4rem 1rem;
   position: relative;
   z-index: 5;
 }
@@ -49,9 +49,9 @@ header {
   text-align: center;
 }
 
-/* Glitch Verde Responsivo */
+/* Glitch Corregido para Móvil */
 .mystery-glitch {
-  font-size: 3rem; /* Tamaño base reducido */
+  font-size: 2.8rem;
   font-weight: 700;
   text-transform: uppercase;
   position: relative;
@@ -59,61 +59,62 @@ header {
   color: var(--text-color);
   letter-spacing: 2px;
   animation: main-glitch 3s infinite;
-  word-wrap: break-word;
+  /* Asegura que el contenedor respete el tamaño del texto */
+  white-space: normal;
 }
 
-/* Media Query para pantallas más grandes */
 @media (min-width: 768px) {
   .mystery-glitch {
     font-size: 5rem;
     letter-spacing: 5px;
+    white-space: nowrap;
   }
   .container {
     padding: 10rem 2rem;
   }
 }
 
+/* Capas de Glitch con Herencia de Tamaño */
 .mystery-glitch::before,
 .mystery-glitch::after {
-  content: "Franki Astral";
+  content: attr(data-text); /* Usa el atributo data-text para el contenido */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: var(--bg-color);
+  pointer-events: none;
 }
 
 .mystery-glitch::before {
   left: 2px;
   text-shadow: -2px 0 #ff003c;
-  clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim 5s infinite linear alternate-reverse;
 }
 
 .mystery-glitch::after {
   left: -2px;
   text-shadow: -2px 0 #00fff2;
-  clip: rect(44px, 450px, 56px, 0);
   animation: glitch-anim2 1s infinite linear alternate-reverse;
 }
 
 @keyframes glitch-anim {
-  0% { clip: rect(31px, 9999px, 94px, 0); }
-  20% { clip: rect(62px, 9999px, 42px, 0); }
-  40% { clip: rect(16px, 9999px, 78px, 0); }
-  60% { clip: rect(87px, 9999px, 11px, 0); }
-  80% { clip: rect(53px, 9999px, 86px, 0); }
-  100% { clip: rect(4px, 9999px, 25px, 0); }
+  0% { clip-path: inset(40% 0 61% 0); }
+  20% { clip-path: inset(92% 0 1% 0); }
+  40% { clip-path: inset(43% 0 1% 0); }
+  60% { clip-path: inset(25% 0 58% 0); }
+  80% { clip-path: inset(54% 0 7% 0); }
+  100% { clip-path: inset(58% 0 43% 0); }
 }
 
 @keyframes glitch-anim2 {
-  0% { clip: rect(65px, 9999px, 100px, 0); }
-  20% { clip: rect(12px, 9999px, 54px, 0); }
-  40% { clip: rect(98px, 9999px, 12px, 0); }
-  60% { clip: rect(34px, 9999px, 67px, 0); }
-  80% { clip: rect(21px, 9999px, 89px, 0); }
-  100% { clip: rect(76px, 9999px, 5px, 0); }
+  0% { clip-path: inset(24% 0 29% 0); }
+  20% { clip-path: inset(54% 0 21% 0); }
+  40% { clip-path: inset(11% 0 31% 0); }
+  60% { clip-path: inset(34% 0 14% 0); }
+  80% { clip-path: inset(14% 0 61% 0); }
+  100% { clip-path: inset(61% 0 14% 0); }
 }
 
 .motto {
@@ -152,11 +153,11 @@ h3 {
 .audio-player audio {
   width: 100%;
   filter: invert(1) hue-rotate(90deg) brightness(1.2);
-  opacity: 0.9; /* Más visible en móvil */
+  opacity: 0.9;
 }
 
 .download-btn {
-  display: block; /* Ocupa todo el ancho en móvil */
+  display: block;
   text-align: center;
   margin-top: 1.5rem;
   color: var(--text-color);
@@ -171,13 +172,10 @@ h3 {
   .download-btn {
     display: inline-block;
   }
-  .card {
-    padding: 2rem;
-  }
 }
 
 footer {
-  padding: 2rem 0;
+  padding: 4rem 0 2rem;
   text-align: center;
   font-size: 0.5rem;
   color: var(--dim-color);
