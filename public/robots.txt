@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://frankiastral.github.io/sitemap.xml
